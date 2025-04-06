@@ -1,1 +1,3 @@
-# -Health-Wellness-Tracker-
+# Health Wellness Tracker
+## Project Overview
+The Health & Wellness Tracker is a serverless web app that helps users monitor and improve their health habits. It collects data from various sources (manual entries or wearables), stores the information securely, and provides insightful visualizations and alerts. The goal is to empower users to track metrics like physical activity, sleep, nutrition, and stress levels, ultimately encouraging a healthier lifestyle.
