@@ -6,28 +6,28 @@ const LoginComponent = ({ }) => {
     const [error, setError] = useState('');
     const navigate = useNavigate();
 
-    //async function handleLogin(userName, passwordHash) {
-    //    try {
-    //        const validationStatus = await fetch(`http://localhost:5147/api/Login?userName=${userName}&passwordHash=${passwordHash}`, {
-    //            method: 'POST',
-    //            headers: {
-    //                'Content-Type': 'application/json'
-    //            }
-    //        })
-    //            .then(response => response.json())
-    //            .catch(err => console.error('Login failed:', err));
+    async function handleLogin(userName, passwordHash) {
+        try {
+            const validationStatus = await fetch(`http://localhost:5147/api/Login?userName=${userName}&passwordHash=${passwordHash}`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            })
+                .then(response => response.json())
+                .catch(err => console.error('Login failed:', err));
 
-    //        if (validationStatus === true) {
-    //            localStorage.setItem('isLoggedIn', 'true');
-    //            navigate('/Dashboard');
-    //            window.location.reload();
-    //        } else {
-    //            setError('Invalid username or password');
-    //        }
-    //    } catch (err) {
-    //        console.error('Login failed:', err)
-    //    }
-    //};
+            if (validationStatus === true) {
+                localStorage.setItem('isLoggedIn', 'true');
+                navigate('/Dashboard');
+                window.location.reload();
+            } else {
+                setError('Invalid username or password');
+            }
+        } catch (err) {
+            console.error('Login failed:', err)
+        }
+    };
 
     function onSubmit(e) {
         e.preventDefault();

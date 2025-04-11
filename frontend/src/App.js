@@ -25,7 +25,8 @@ function App() {
                     <div className="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                         <div className="navbar-nav flex-grow-1">
                             <Link className="nav-link text-white" to="/Home">Home</Link>
-                            <Link className={`nav-link ${!isLoggedIn ? 'text-muted disabled' : 'text-white'}`} to="/Dashboard">Dashboard</Link>
+                            <Link className={`nav-link`} to="/Dashboard">Dashboard</Link>
+                            {/*${!isLoggedIn ? 'text-muted disabled' : 'text-white'}*/}
                         </div>
                         <div className="navbar-nav login px-3 rounded">
                             {isLoggedIn ? (
