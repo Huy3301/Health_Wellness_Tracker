@@ -19,25 +19,25 @@
 }
 
 :root {
-    --Primary: #dfa5bc;
-    --Secondary: #6FA2C0;
-    --Light: #DEECF5;
-    --Accent: #49b45d;
+    --Primary: #5158BB;
+    --Secondary: #AEB8FE;
+/*    --Light: #DEECF5;*/
+    --Accent: #FFD6E4;
 }
 
 body {
     font-family: 'Roboto Condensed';
-    /*    overflow: hidden;*/
+    background-color: var(--Secondary);
 }
 
 nav {
     background-color: var(--Primary);
 }
-
+/*
 .navbar-nav.login {
     background-color: var(--Accent);
 }
-
+*/
 .btn {
     background-color: var(--Secondary);
 }

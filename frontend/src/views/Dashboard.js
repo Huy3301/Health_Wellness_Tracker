@@ -5,8 +5,14 @@ export default function Dashboard() {
     return (
         <div>
             <h1>Welcome to Your Health Dashboard</h1>
-            <MoodTracker />
-            <WaterIntakeTracker />
+            <div className="row">
+                <div className="col-5">
+                    <MoodTracker />
+                </div>
+                <div className="col-3">
+                    <WaterIntakeTracker />
+                </div>
+            </div>
         </div>
     );
 }
