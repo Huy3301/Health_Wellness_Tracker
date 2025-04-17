@@ -1,0 +1,25 @@
+﻿.breathing-circle {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    background-color: #a3d5ff;
+    animation: breathe 16s ease-in-out infinite;
+}
+
+@keyframes breathe {
+    0%, 100% {
+        transform: scale(1);
+    }
+
+    25% {
+        transform: scale(1.5);
+    }
+
+    50% {
+        transform: scale(1.5);
+    }
+
+    75% {
+        transform: scale(1);
+    }
+}
