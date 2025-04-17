@@ -1,11 +1,11 @@
 ﻿import { useState, useEffect } from 'react';
 
 const moods = [
+    { label: 'Excited', value: 'excited', emoji: '🤩' },
     { label: 'Happy', value: 'happy', emoji: '😊' },
     { label: 'Okay', value: 'okay', emoji: '😐' },
     { label: 'Sad', value: 'sad', emoji: '😢' },
-    { label: 'Stressed', value: 'stressed', emoji: '😣' },
-    { label: 'Excited', value: 'excited', emoji: '🤩' },
+    { label: 'Stressed', value: 'stressed', emoji: '😣' }
 ];
 
 export default function MoodTracker() {
@@ -40,22 +40,25 @@ export default function MoodTracker() {
                 <h3 className="mb-3">How are you feeling today?</h3>
                 <div className="d-flex justify-content-center flex-wrap gap-3">
                     {moods.map(({ label, value, emoji }) => (
-                        <button
-                            key={value}
-                            onClick={() => handleMoodClick(value)}
-                            className="border-0 bg-transparent fs-1"
-                            style={{
-                                width: '80px',
-                                height: '80px',
-                                lineHeight: '80px',
-                                textAlign: 'center',
-                                outline: 'none',
-                                boxShadow: 'none',
-                            }}
-                            aria-label={label}
-                        >
-                            {emoji}
-                        </button>
+                        <div>
+                            <button
+                                key={value}
+                                onClick={() => handleMoodClick(value)}
+                                className="border-0 bg-transparent fs-1"
+                                style={{
+                                    width: '80px',
+                                    height: '80px',
+                                    lineHeight: '80px',
+                                    textAlign: 'center',
+                                    outline: 'none',
+                                    boxShadow: 'none',
+                                }}
+                                aria-label={label}
+                            >
+                                {emoji}
+                            </button>
+                            <p>{label}</p>
+                        </div>
                     ))}
                 </div>
             </div>

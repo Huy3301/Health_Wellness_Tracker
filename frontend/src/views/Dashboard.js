@@ -1,5 +1,6 @@
 import MoodTracker from '../components/MoodTracker';
 import WaterIntakeTracker from '../components/WaterIntakeTracker';
+import BreathingGuide from '../components/BreathingGuide';
 
 export default function Dashboard() {
     return (
@@ -11,6 +12,9 @@ export default function Dashboard() {
                 </div>
                 <div className="col-3">
                     <WaterIntakeTracker />
+                </div>
+                <div className="col-3">
+                    <BreathingGuide />
                 </div>
             </div>
         </div>
