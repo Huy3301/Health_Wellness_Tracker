@@ -1,0 +1,51 @@
+.donut-chart-wrapper {
+    width: 140px;
+    height: 140px;
+}
+
+.donut-chart {
+    width: 100%;
+    height: 100%;
+    transform: rotate(-90deg);
+}
+
+.circle-bg {
+    fill: none;
+    stroke: #eee;
+    stroke-width: 3.5px;
+}
+
+.circle-protein {
+    fill: none;
+    stroke: #dc3545;
+    stroke-width: 3.5px;
+    stroke-dashoffset: 0;
+    stroke-linecap: round;
+}
+
+.circle-fat {
+    fill: none;
+    stroke: #ffc107;
+    stroke-width: 3.5px;
+    stroke-dashoffset: 0;
+    stroke-linecap: round;
+}
+
+.circle-carb {
+    fill: none;
+    stroke: #0d6efd;
+    stroke-width: 3.5px;
+    stroke-dashoffset: 0;
+    stroke-linecap: round;
+}
+
+
+.calorie-text {
+    fill: #333;
+    font-size: 5px;
+    transform: rotate(90deg);
+}
+
+.modal-backdrop {
+    display: none;
+}
