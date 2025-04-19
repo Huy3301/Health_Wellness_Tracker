@@ -14,22 +14,22 @@ export default function FoodTracker() {
     const fatGoal = 70;
     const carbsGoal = 250;
 
-    const handleAdd = (c, p, f, ca) => {
-        setCalories(prev => prev + c);
+    const handleAdd = (cals, p, f, ca) => {
+        setCalories(prev => prev + cals);
         setProtein(prev => prev + p);
         setFat(prev => prev + f);
         setCarbs(prev => prev + ca);
-        setMacros(prev => prev + c + p + f);
+        setMacros(prev => prev + ca + p + f);
         setShowModal(false);
     };
 
     // Macro ratios based on total macro input
-    const totalMacros = protein + fat + carbs;
-    const fillRatio = Math.min(calories / calorieGoal, 1);
+    const proteinPercent = macros > 0 ? (protein / macros) * 100 : 0;
+    const fatPercent = macros > 0 ? (fat / macros) * 100 : 0;
+    const carbPercent = macros > 0 ? (carbs / macros) * 100 : 0;
 
-    const proteinPercent = totalMacros > 0 ? fillRatio * (protein / totalMacros) * 100 : 0;
-    const fatPercent = totalMacros > 0 ? fillRatio * (fat / totalMacros) * 100 : 0;
-    const carbPercent = totalMacros > 0 ? fillRatio * (carbs / totalMacros) * 100 : 0;
+    const fatOffset = carbPercent;
+    const proteinOffset = carbPercent + fatPercent;
 
     return (
         <div className="container mt-5">
@@ -42,7 +42,7 @@ export default function FoodTracker() {
                         <svg viewBox="0 0 36 36" className="donut-chart">
                             <circle className="circle-bg" cx="18" cy="18" r="16" />
                             {/* Macro Ring Stack */}
-                            {totalMacros > 0 && (
+                            {macros > 0 && (
                                 <>
                                     {/* Carbs at bottom */}
                                     <circle
@@ -60,7 +60,7 @@ export default function FoodTracker() {
                                         cy="18"
                                         r="16"
                                         strokeDasharray={`${fatPercent} ${100 - fatPercent}`}
-                                        strokeDashoffset={`-${carbPercent}`}
+                                        strokeDashoffset={-fatOffset}
                                     />
                                     {/* Protein on top */}
                                     <circle
@@ -69,7 +69,7 @@ export default function FoodTracker() {
                                         cy="18"
                                         r="16"
                                         strokeDasharray={`${proteinPercent} ${100 - proteinPercent}`}
-                                        strokeDashoffset={`-${carbPercent + fatPercent}`}
+                                        strokeDashoffset={-proteinOffset}
                                     />
                                 </>
                             )}
@@ -113,22 +113,23 @@ export default function FoodTracker() {
                             </div>
                             <div className="modal-body">
                                 <label>Calories (kcal)</label>
-                                <input id="add-calories" type="number" className="form-control mb-2" />
+                                <input id="add-calories" type="number" placeholder="0" className="form-control mb-2" />
                                 <label>Protein (g)</label>
-                                <input id="add-protein" type="number" className="form-control mb-2" />
+                                <input id="add-protein" type="number" placeholder="0" className="form-control mb-2" />
                                 <label>Fat (g)</label>
-                                <input id="add-fat" type="number" className="form-control mb-2" />
+                                <input id="add-fat" type="number" placeholder="0" className="form-control mb-2" />
                                 <label>Carbs (g)</label>
-                                <input id="add-carbs" type="number" className="form-control mb-2" />
+                                <input id="add-carbs" type="number" placeholder="0" className="form-control mb-2" />
                             </div>
                             <div className="modal-footer">
                                 <button
                                     className="btn btn-primary"
                                     onClick={() => {
-                                        const cals = parseInt(document.getElementById('add-calories').value) || 0;
-                                        const p = parseInt(document.getElementById('add-protein').value) || 0;
-                                        const f = parseInt(document.getElementById('add-fat').value) || 0;
-                                        const ca = parseInt(document.getElementById('add-carbs').value) || 0;
+                                        const safeParse = (id) => Math.max(parseInt(document.getElementById(id).value) || 0, 0);
+                                        const cals = safeParse('add-calories');
+                                        const p = safeParse('add-protein');
+                                        const f = safeParse('add-fat');
+                                        const ca = safeParse('add-carbs');
                                         handleAdd(cals, p, f, ca);
                                     }}
                                 >
