@@ -83,15 +83,15 @@ export default function FoodTracker() {
                     <div className="flex-grow-1">
                         <div className="mb-2">
                             <label>Protein: {protein}g</label>
-                            <div className="progress"><div className="progress-bar bg-danger" style={{ width: `${(protein / proteinGoal) * 100}%` }} /></div>
+                            <div className="progress"><div className="progress-bar" style={{ backgroundColor: `#5158BB`, width: `${(protein / proteinGoal) * 100}%` }} /></div>
                         </div>
                         <div className="mb-2">
                             <label>Fat: {fat}g</label>
-                            <div className="progress"><div className="progress-bar bg-warning" style={{ width: `${(fat / fatGoal) * 100}%` }} /></div>
+                            <div className="progress"><div className="progress-bar" style={{ backgroundColor: `#594899`, width: `${(fat / fatGoal) * 100}%` }} /></div>
                         </div>
                         <div className="mb-2">
                             <label>Carbs: {carbs}g</label>
-                            <div className="progress"><div className="progress-bar bg-primary" style={{ width: `${(carbs / carbsGoal) * 100}%` }} /></div>
+                            <div className="progress"><div className="progress-bar" style={{ backgroundColor: `#AEB8FE`, width: `${(carbs / carbsGoal) * 100}%` }} /></div>
                         </div>
                     </div>
 

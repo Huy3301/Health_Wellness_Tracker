@@ -17,21 +17,21 @@
 
 .circle-protein {
     fill: none;
-    stroke: #dc3545;
+    stroke: #7a82ab;
     stroke-width: 3.5px;
     stroke-linecap: round;
 }
 
 .circle-fat {
     fill: none;
-    stroke: #ffc107;
+    stroke: #c6d4ff;
     stroke-width: 3.5px;
     stroke-linecap: round;
 }
 
 .circle-carb {
     fill: none;
-    stroke: #0d6efd;
+    stroke: #307473;
     stroke-width: 3.5px;
     stroke-linecap: round;
 }

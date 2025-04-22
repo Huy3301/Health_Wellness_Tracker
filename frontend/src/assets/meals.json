@@ -1,0 +1,134 @@
+{
+  "Meals": [
+    {
+      "PutRequest": {
+        "Item": {
+          "MealID": { "S": "1" },
+          "Name": { "S": "Chicken Parmigiana" },
+          "Calories": { "N": "599" },
+          "Protein": { "N": "41.9" },
+          "Carbs": { "N": "19.1" },
+          "Fat": { "N": "23.4" },
+          "ImageUrl": { "S": "" }
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "MealID": { "S": "2" },
+          "Name": { "S": "Beef Lasagne" },
+          "Calories": { "N": "407" },
+          "Protein": { "N": "24.2" },
+          "Carbs": { "N": "59.9" },
+          "Fat": { "N": "6.0" },
+          "ImageUrl": { "S": "" }
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "MealID": { "S": "3" },
+          "Name": { "S": "Sticky Korean Chicken" },
+          "Calories": { "N": "596" },
+          "Protein": { "N": "27.3" },
+          "Carbs": { "N": "51.6" },
+          "Fat": { "N": "30.6" },
+          "ImageUrl": { "S": "" }
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "MealID": { "S": "4" },
+          "Name": { "S": "Panang Chicken Curry" },
+          "Calories": { "N": "760" },
+          "Protein": { "N": "51.1" },
+          "Carbs": { "N": "83.7" },
+          "Fat": { "N": "22.4" },
+          "ImageUrl": { "S": "" }
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "MealID": { "S": "5" },
+          "Name": { "S": "Malaysian Satay Chicken" },
+          "Calories": { "N": "538" },
+          "Protein": { "N": "38.2" },
+          "Carbs": { "N": "70.3" },
+          "Fat": { "N": "10.6" },
+          "ImageUrl": { "S": "" }
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "MealID": { "S": "6" },
+          "Name": { "S": "Tokyo Teriyaki Chicken" },
+          "Calories": { "N": "520" },
+          "Protein": { "N": "26.0" },
+          "Carbs": { "N": "92.0" },
+          "Fat": { "N": "3.5" },
+          "ImageUrl": { "S": "" }
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "MealID": { "S": "7" },
+          "Name": { "S": "Honey Chicken with Fried Rice" },
+          "Calories": { "N": "466" },
+          "Protein": { "N": "36.3" },
+          "Carbs": { "N": "36.0" },
+          "Fat": { "N": "17.9" },
+          "ImageUrl": { "S": "" }
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "MealID": { "S": "8" },
+          "Name": { "S": "Italian Lamb Ragu" },
+          "Calories": { "N": "650" },
+          "Protein": { "N": "45.0" },
+          "Carbs": { "N": "55.0" },
+          "Fat": { "N": "20.0" },
+          "ImageUrl": { "S": "" }
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "MealID": { "S": "9" },
+          "Name": { "S": "Roast Lamb & Vegetables" },
+          "Calories": { "N": "550" },
+          "Protein": { "N": "35.0" },
+          "Carbs": { "N": "40.0" },
+          "Fat": { "N": "25.0" },
+          "ImageUrl": { "S": "" }
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "MealID": { "S": "10" },
+          "Name": { "S": "Chicken & Vegetable Pie" },
+          "Calories": { "N": "450" },
+          "Protein": { "N": "20.0" },
+          "Carbs": { "N": "35.0" },
+          "Fat": { "N": "18.0" },
+          "ImageUrl": { "S": "" }
+        }
+      }
+    }
+  ]
+}

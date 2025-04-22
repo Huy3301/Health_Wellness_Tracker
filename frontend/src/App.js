@@ -1,16 +1,26 @@
 import './App.css';
 import React, { useState } from 'react';
 import { Link, Outlet, useNavigate } from 'react-router-dom';
+import { useAuth } from "react-oidc-context";
 
 function App() {
-    const [isLoggedIn, setIsLoggedIn] = useState(localStorage.getItem('isLoggedIn') === 'true');
     const navigate = useNavigate();
+    const auth = useAuth();
 
-    const handleLogout = () => {
-        localStorage.setItem('isLoggedIn', 'false');
-        setIsLoggedIn(false);
-        navigate('/');
+    const signOutRedirect = () => {
+        const clientId = "3ei4q1kkcbu1dgkutonaubm9ut";
+        const logoutUri = "<logout uri>";
+        const cognitoDomain = "https://ap-southeast-2f3ntzmmts.auth.ap-southeast-2.amazoncognito.com";
+        window.location.href = `${cognitoDomain}/logout?client_id=${clientId}&logout_uri=${encodeURIComponent(logoutUri)}`;
     };
+
+    if (auth.isLoading) {
+        return <div>Loading...</div>;
+    }
+
+    if (auth.error) {
+        return <div>Encountering error... {auth.error.message}</div>;
+    }
 
     return (
         <div className="App">
@@ -29,14 +39,10 @@ function App() {
                             {/*${!isLoggedIn ? 'text-muted disabled' : 'text-white'}*/}
                         </div>
                         <div className="navbar-nav login px-3 rounded">
-                            {isLoggedIn ? (
-                                <Link className="nav-link" to="/" style={{ color: '#15425D' }} onClick={handleLogout}>
-                                    Logout
-                                </Link>
+                            {auth.isAuthenticated ? (
+                                <button onClick={() => signOutRedirect()}>Sign out</button>
                             ) : (
-                                <Link className="nav-link" to="/Login" style={{ color: '#15425D' }}>
-                                    Login
-                                </Link>
+                                <button onClick={() => auth.signinRedirect()}>Sign in</button>
                             )}
                         </div>
                     </div>

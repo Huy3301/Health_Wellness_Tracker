@@ -1,31 +1,24 @@
 import { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import SHA256 from 'crypto-js/sha256';
+import { signUp } from '../utils/auth';
 
 const RegisterComponent = ({ }) => {
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
     const [error, setError] = useState('');
     const navigate = useNavigate();
 
-    async function handleLogin(userName, passwordHash) {
+    const handleSignUp = async (e) => {
+        e.preventDefault();
         try {
-            const validationStatus = await fetch(`http://localhost:5147/api/Register?userName=${userName}&passwordHash=${passwordHash}`, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                }
-            })
-                .then(response => response.json())
-                .catch(err => console.error('Login failed:', err));
-
-            if (validationStatus === true) {
-                navigate('/Dashboard');
-            } else {
-                setError('Username is taken');
-            }
+            await signUp(email, password);
+            onRegistered(email);
         } catch (err) {
-            console.error('Login failed:', err)
+            setError(err.message);
         }
     };
+
 
     function onSubmit(e) {
         e.preventDefault();
