@@ -8,20 +8,10 @@ import Home from "./views/Home";
 import Login from "./views/Login";
 import Register from "./views/Register";
 import Dashboard from "./views/Dashboard";
-import { AuthProvider } from "react-oidc-context";
-
-const cognitoAuthConfig = {
-    authority: "https://cognito-idp.ap-southeast-2.amazonaws.com/ap-southeast-2_f3nTZmMTs",
-    client_id: "3ei4q1kkcbu1dgkutonaubm9ut",
-    redirect_uri: "https://d84l1y8p4kdic.cloudfront.net",
-    response_type: "code",
-    scope: "phone openid email",
-};
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
     <React.StrictMode>
-        <AuthProvider {...cognitoAuthConfig}>
             <BrowserRouter>
                 <Routes>
                     <Route path="/" element={<App />}>
@@ -34,7 +24,6 @@ root.render(
                     </Route>
                 </Routes>
             </BrowserRouter>
-        </AuthProvider>
     </React.StrictMode>
 );
 

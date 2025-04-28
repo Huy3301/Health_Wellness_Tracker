@@ -3,52 +3,32 @@ import { Link, useNavigate } from 'react-router-dom';
 import SHA256 from 'crypto-js/sha256';
 
 const LoginComponent = ({ }) => {
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
     const [error, setError] = useState('');
     const navigate = useNavigate();
 
-    async function handleLogin(userName, passwordHash) {
+    const handleLogin = async (e) => {
+        e.preventDefault();
         try {
-            const validationStatus = await fetch(`http://localhost:5147/api/Login?userName=${userName}&passwordHash=${passwordHash}`, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                }
-            })
-                .then(response => response.json())
-                .catch(err => console.error('Login failed:', err));
-
-            if (validationStatus === true) {
-                localStorage.setItem('isLoggedIn', 'true');
-                navigate('/Dashboard');
-                window.location.reload();
-            } else {
-                setError('Invalid username or password');
-            }
+            const { user } = await login(email, password);
+            onLogin(user);
         } catch (err) {
-            console.error('Login failed:', err)
+            setError(err.message);
         }
     };
 
-    function onSubmit(e) {
-        e.preventDefault();
-        const form = e.target;
-        const formData = new FormData(form);
-        const userName = formData.get('userName');
-        const passwordHash = SHA256(formData.get('password')).toString();
-        handleLogin(userName, passwordHash);
-    }
-
     return (
         <div className="row justify-content-center pt-5">
-            <form method="post" onSubmit={onSubmit} className="col-5 m-3">
+            <form method="post" onSubmit={handleLogin} className="col-5 m-3">
                 <h2 className="text-center"><b>Login</b></h2>
                 <div className="row m-3">
-                    <label htmlFor="userName" className="col-auto">Username</label>
-                    <input type="text" name="userName" className="form-control" aria-label="Username" required />
+                    <label htmlFor="Email" className="col-auto">Email</label>
+                    <input type="text" name="email" className="form-control" aria-label="Email" onChange={e => setEmail(e.target.value)} required />
                 </div>
                 <div className="row m-3">
                     <label htmlFor="password" className="col-auto">Password</label>
-                    <input type="password" name="password" className="form-control" aria-label="Password" required />
+                    <input type="password" name="password" className="form-control" aria-label="Password" onChange={e => setPassword(SHA256(e.target.value).toString())} required />
                 </div>
                 {error && <p style={{ color: 'red' }}>{error}</p>}
                 <div className="row justify-content-center m-3">

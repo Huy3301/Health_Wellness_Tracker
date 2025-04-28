@@ -19,27 +19,17 @@ const RegisterComponent = ({ }) => {
         }
     };
 
-
-    function onSubmit(e) {
-        e.preventDefault();
-        const form = e.target;
-        const formData = new FormData(form);
-        const userName = formData.get('userName');
-        const passwordHash = SHA256(formData.get('password')).toString();
-        handleLogin(userName, passwordHash);
-    }
-
     return (
         <div className="row justify-content-center pt-5">
-            <form method="post" onSubmit={onSubmit} className="col-5 m-3">
+            <form method="post" onSubmit={handleSignUp} className="col-5 m-3">
                 <h2 className="text-center"><b>Register</b></h2>
                 <div className="row m-3">
-                    <label htmlFor="userName" className="col-auto">Username</label>
-                    <input type="text" name="userName" className="form-control" aria-label="Username" required />
+                    <label htmlFor="Email" className="col-auto">Email</label>
+                    <input type="text" name="email" className="form-control" aria-label="Email" onChange={e => setEmail(e.target.value)} required />
                 </div>
                 <div className="row m-3">
                     <label htmlFor="password" className="col-auto">Password</label>
-                    <input type="password" name="password" className="form-control" aria-label="Password" required />
+                    <input type="password" name="password" className="form-control" aria-label="Password" onChange={e => setPassword(SHA256(e.target.value).toString())} required />
                 </div>
                 {/*<div className="row m-3">*/}
                 {/*    <label htmlFor="password" className="col-auto">Confirm Password</label>*/}

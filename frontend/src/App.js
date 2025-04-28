@@ -1,26 +1,39 @@
 import './App.css';
 import React, { useState } from 'react';
 import { Link, Outlet, useNavigate } from 'react-router-dom';
-import { useAuth } from "react-oidc-context";
+import { CognitoUserPool } from 'amazon-cognito-identity-js';
+import { poolData } from './cognitoConfig';
+import { logout } from './utils/auth';
+//import { useAuth } from "react-oidc-context"; Remove
+
+const userPool = new CognitoUserPool(poolData);
 
 function App() {
     const navigate = useNavigate();
-    const auth = useAuth();
+    const [user, setUser] = useState(null);
 
-    const signOutRedirect = () => {
-        const clientId = "3ei4q1kkcbu1dgkutonaubm9ut";
-        const logoutUri = "<logout uri>";
-        const cognitoDomain = "https://ap-southeast-2f3ntzmmts.auth.ap-southeast-2.amazoncognito.com";
-        window.location.href = `${cognitoDomain}/logout?client_id=${clientId}&logout_uri=${encodeURIComponent(logoutUri)}`;
+    useEffect(() => {
+        const currentUser = userPool.getCurrentUser();
+        if (currentUser) {
+            currentUser.getSession((err, session) => {
+                if (!err && session.isValid()) {
+                    setUser(currentUser);
+                } else {
+                    setUser(null);
+                }
+            });
+        }
+    }, []);
+
+    const handleLogout = () => {
+        logout();
+        setUser(null);
+        navigate('/login');
     };
 
-    if (auth.isLoading) {
-        return <div>Loading...</div>;
-    }
-
-    if (auth.error) {
-        return <div>Encountering error... {auth.error.message}</div>;
-    }
+    const handleLoginRedirect = () => {
+        navigate('/login');
+    };
 
     return (
         <div className="App">
@@ -39,10 +52,10 @@ function App() {
                             {/*${!isLoggedIn ? 'text-muted disabled' : 'text-white'}*/}
                         </div>
                         <div className="navbar-nav login px-3 rounded">
-                            {auth.isAuthenticated ? (
-                                <button onClick={() => signOutRedirect()}>Sign out</button>
+                            {user ? (
+                                <button onClick={handleLogout}>Sign out</button>
                             ) : (
-                                <button onClick={() => auth.signinRedirect()}>Sign in</button>
+                                <button onClick={handleLoginRedirect}>Sign in</button>
                             )}
                         </div>
                     </div>
