@@ -1,9 +1,8 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import SHA256 from 'crypto-js/sha256';
-import { signUp } from '../utils/auth';
+import { signUp } from '../utils/auth';  // Import signUp function (no SHA256)
 
-const RegisterComponent = ({ }) => {
+const RegisterComponent = ({ onRegistered }) => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState('');
@@ -13,7 +12,8 @@ const RegisterComponent = ({ }) => {
         e.preventDefault();
         try {
             await signUp(email, password);
-            onRegistered(email);
+            onRegistered(email);  // Pass email to App to trigger confirmation page
+            navigate('/confirm');  // Go to Confirm page
         } catch (err) {
             setError(err.message);
         }
@@ -25,11 +25,11 @@ const RegisterComponent = ({ }) => {
                 <h2 className="text-center"><b>Register</b></h2>
                 <div className="row m-3">
                     <label htmlFor="Email" className="col-auto">Email</label>
-                    <input type="text" name="email" className="form-control" aria-label="Email" onChange={e => setEmail(e.target.value)} required />
+                    <input type="email" name="email" className="form-control" onChange={e => setEmail(e.target.value)} required />
                 </div>
                 <div className="row m-3">
-                    <label htmlFor="password" className="col-auto">Password</label>
-                    <input type="password" name="password" className="form-control" aria-label="Password" onChange={e => setPassword(SHA256(e.target.value).toString())} required />
+                    <label htmlFor="Password" className="col-auto">Password</label>
+                    <input type="password" name="password" className="form-control" onChange={e => setPassword(e.target.value)} required />
                 </div>
                 {/*<div className="row m-3">*/}
                 {/*    <label htmlFor="password" className="col-auto">Confirm Password</label>*/}
@@ -40,12 +40,11 @@ const RegisterComponent = ({ }) => {
                     <button type="submit" className="col-3 btn btn-primary">Register</button>
                 </div>
                 <div className="row col-auto text-center">
-                    <Link to="/Login"><i>Already have an Account? Login</i></Link>
+                    <Link to="/login"><i>Already have an Account? Login</i></Link>
                 </div>
             </form>
         </div>
-    )
-}
+    );
+};
 
-
-export default RegisterComponent
+export default RegisterComponent;
