@@ -42,8 +42,17 @@ export default function FoodTracker() {
     useEffect(() => {
         const loadMeals = async () => {
             try {
-                const session = await getSession();
-                const token = session.getIdToken().getJwtToken();
+                let token = null;
+
+                // Check if logged in
+                try {
+                    const session = await getSession();
+                    token = session.getIdToken().getJwtToken();
+                } catch (err) {
+                    console.log("No session found, assuming guest mode.");
+                }
+
+                // Fetch meals (with or without token)
                 const mealsData = await fetchMeals(token);
                 setMeals(mealsData);
             } catch (err) {
