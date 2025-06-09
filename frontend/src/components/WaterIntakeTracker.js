@@ -1,9 +1,27 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import './WaterIntakeTracker.css'; // Don't forget to create this CSS file
 
-export default function WaterIntakeTracker() {
+export default function WaterIntakeTracker({ guest }) {
     const maxGlasses = 8;
     const [glasses, setGlasses] = useState(0);
+
+    // Load saved progress in guest mode
+    useEffect(() => {
+        if (guest) {
+            const saved = parseInt(localStorage.getItem('waterTracker') || '0');
+            if (!isNaN(saved)) {
+                setGlasses(saved);
+            }
+        }
+    }, [guest]);
+
+    // Persist progress when guest mode is active
+    useEffect(() => {
+        if (guest) {
+            localStorage.setItem('waterTracker', String(glasses));
+        }
+    }, [guest, glasses]);
+
 
     const percentage = (glasses / maxGlasses) * 100;
 

@@ -2,6 +2,7 @@ import './App.css';
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate, Routes, Route, Navigate } from 'react-router-dom';
 import LoginComponent from './components/LoginComponent';
+import LoginPrompt from './components/LoginPrompt';
 import RegisterComponent from './components/RegisterComponent';
 import ConfirmForm from './components/RegisterConfirm';
 import Dashboard from './views/Dashboard';

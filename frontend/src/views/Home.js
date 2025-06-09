@@ -12,7 +12,7 @@ const Home = ({ }) => {
                 {localStorage.getItem('isLoggedIn') === 'true' ? (
                     <p></p>
                 ) : (
-                    <Link className="btn btn-primary col-2 p-2" to="/Login" >
+                    <Link className="btn btn-primary col-2 p-2" to="/login" >
                         Login
                     </Link>
                 )}
