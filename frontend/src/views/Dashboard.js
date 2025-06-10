@@ -5,21 +5,12 @@ import FoodTracker from '../components/FoodTracker';
 import StepTracker from '../components/StepTracker';
 import AppointmentTracker from '../components/AppointmentTracker';
 
-export default function Dashboard() {
+export default function Dashboard({ guest }) {
     return (
         <div className="m-5">
             <h1 className="text-center m-3">Welcome to Your Health Dashboard</h1>
             <div className="row m-3">
-<<<<<<< Updated upstream
-                <div className="col-5">
-                    <MoodTracker />
-                </div>
-                <div className="col-5">
-                    <FoodTracker />
-                </div>
-                <div className="col-3">
-                    <WaterIntakeTracker />
-=======
+                    <WaterIntakeTracker guest={guest} />
                 <div className="col-md-6 col-lg-4 mb-4">
                     <MoodTracker guest={guest} />
                 </div>
@@ -28,7 +19,6 @@ export default function Dashboard() {
                 </div>
                 <div className="col-md-6 col-lg-4 mb-4">
                     <WaterIntakeTracker guest={guest} />
->>>>>>> Stashed changes
                 </div>
                 <div className="col-md-6 col-lg-4 mb-4">
                     <StepTracker guest={guest} />

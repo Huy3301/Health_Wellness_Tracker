@@ -8,10 +8,20 @@ const moods = [
     { label: 'Stressed', value: 'stressed', emoji: '😣' }
 ];
 
-export default function MoodTracker() {
+export default function MoodTracker({ guest }) {
     const [mood, setMood] = useState('');
     const [note, setNote] = useState('');
     const [submitted, setSubmitted] = useState(false);
+
+    // Load saved data when guest mode is enabled
+    useEffect(() => {
+        if (guest) {
+            const saved = JSON.parse(localStorage.getItem('moodTracker') || '{}');
+            if (saved.mood) setMood(saved.mood);
+            if (saved.note) setNote(saved.note);
+            if (saved.mood) setSubmitted(true);
+        }
+    }, [guest]);
 
     const handleMoodClick = (value) => {
         setMood(value);
@@ -21,6 +31,9 @@ export default function MoodTracker() {
 
     const handleSubmit = () => {
         setSubmitted(true);
+        if (guest) {
+            localStorage.setItem('moodTracker', JSON.stringify({ mood, note }));
+        }
         const modal = window.bootstrap.Modal.getInstance(document.getElementById('moodModal'));
         modal.hide();
     };

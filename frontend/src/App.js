@@ -2,6 +2,7 @@ import './App.css';
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate, Routes, Route, Navigate } from 'react-router-dom';
 import LoginComponent from './components/LoginComponent';
+import LoginPrompt from './components/LoginPrompt';
 import RegisterComponent from './components/RegisterComponent';
 import ConfirmForm from './components/RegisterConfirm';
 import Dashboard from './views/Dashboard';
@@ -17,6 +18,8 @@ function App() {
     const navigate = useNavigate();
     const [user, setUser] = useState(null);
     const [registeredEmail, setRegisteredEmail] = useState('');
+    const [showLoginPrompt, setShowLoginPrompt] = useState(false);
+    const [guest, setGuest] = useState(false);
 
     useEffect(() => {
         const currentUser = userPool.getCurrentUser();
@@ -28,16 +31,25 @@ function App() {
                     setUser(null);
                 }
             });
+        } else {
+            setShowLoginPrompt(true);
         }
     }, []);
 
     const handleLogout = () => {
         logout();
         setUser(null);
+        setGuest(false);
         navigate('/login');
     };
 
+    const handleGuestAccess = () => {
+        setGuest(true);
+        setShowLoginPrompt(false);
+    };
+
     const handleLoginRedirect = () => {
+        setShowLoginPrompt(false);
         navigate('/login');
     };
 
@@ -66,13 +78,20 @@ function App() {
                 </div>
             </nav>
 
+            {showLoginPrompt && (
+                <LoginPrompt
+                    onLogin={handleLoginRedirect}
+                    onContinueAsGuest={handleGuestAccess}
+                />
+            )}
+
             <Routes>
-                <Route path="/" element={<Home />} />
+                <Route path="/" element={<Navigate to="/dashboard" />} />
+                <Route path="/dashboard" element={<Dashboard guest={guest} />} />
                 <Route path="/home" element={<Home />} />
                 <Route path="/login" element={<LoginComponent onLogin={setUser} />} />
                 <Route path="/register" element={<RegisterComponent onRegistered={setRegisteredEmail} />} />
                 <Route path="/confirm" element={<ConfirmForm email={registeredEmail} />} />
-                <Route path="/dashboard" element={user ? <Dashboard /> : <Navigate to="/login" />} />
             </Routes>
         </div>
     );
