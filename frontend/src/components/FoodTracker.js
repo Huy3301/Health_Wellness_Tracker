@@ -3,7 +3,7 @@ import './FoodTracker.css';
 import { fetchMeals } from './api';
 import { getSession } from '../utils/auth';
 
-export default function FoodTracker() {
+export default function FoodTracker({ guest }) {
     const [calories, setCalories] = useState(0);
     const [protein, setProtein] = useState(0);
     const [fat, setFat] = useState(0);
@@ -25,6 +25,28 @@ export default function FoodTracker() {
         setShowModal(false);
     };
 
+    // Load saved data when guest mode is active
+    useEffect(() => {
+        if (guest) {
+            const saved = JSON.parse(localStorage.getItem('foodTracker') || '{}');
+            setCalories(saved.calories || 0);
+            setProtein(saved.protein || 0);
+            setFat(saved.fat || 0);
+            setCarbs(saved.carbs || 0);
+            setMacros(saved.macros || 0);
+        }
+    }, [guest]);
+
+    // Persist state for guests
+    useEffect(() => {
+        if (guest) {
+            localStorage.setItem(
+                'foodTracker',
+                JSON.stringify({ calories, protein, fat, carbs, macros })
+            );
+        }
+    }, [guest, calories, protein, fat, carbs, macros]);
+
     // Macro ratios based on total macro input
     const proteinPercent = macros > 0 ? (protein / macros) * 100 : 0;
     const fatPercent = macros > 0 ? (fat / macros) * 100 : 0;
@@ -40,10 +62,20 @@ export default function FoodTracker() {
     const [manualEntry, setManualEntry] = useState(false);
 
     useEffect(() => {
+        if (guest) return; // Skip AWS call in guest mode
         const loadMeals = async () => {
             try {
-                const session = await getSession();
-                const token = session.getIdToken().getJwtToken();
+                let token = null;
+
+                // Check if logged in
+                try {
+                    const session = await getSession();
+                    token = session.getIdToken().getJwtToken();
+                } catch (err) {
+                    console.log("No session found");
+                }
+
+                // Fetch meals (with or without token)
                 const mealsData = await fetchMeals(token);
                 setMeals(mealsData);
             } catch (err) {
@@ -52,7 +84,7 @@ export default function FoodTracker() {
         };
 
         loadMeals();
-    }, []);
+    }, [guest]);
 
     return (
         <div className="container mt-5">

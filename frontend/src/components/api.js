@@ -1,15 +1,24 @@
-// api.js
-export async function fetchMeals(token) {
-    const response = await fetch("https://y98m0iaqea.execute-api.ap-southeast-2.amazonaws.com/meals", {
-        method: 'GET',
-        headers: {
-            Authorization: token
-        }
-    });
+export async function fetchMeals(token = null) {
+    const headers = {};
 
-    if (!response.ok) {
-        throw new Error("Failed to fetch meals");
+    // Include token only if it exists (logged-in users)
+    if (token) {
+        headers.Authorization = token;
     }
 
-    return await response.json();
+    try {
+        const response = await fetch("https://y98m0iaqea.execute-api.ap-southeast-2.amazonaws.com/meals", {
+            method: 'GET',
+            headers,
+        });
+
+        if (!response.ok) {
+            throw new Error("Failed to fetch meals");
+        }
+
+        return await response.json();
+    } catch (error) {
+        console.error("Error fetching meals:", error);
+        throw error;
+    }
 }
