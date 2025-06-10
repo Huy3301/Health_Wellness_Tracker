@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import './WaterIntakeTracker.css'; // Don't forget to create this CSS file
+import './WaterIntakeTracker.css'; 
 
 export default function WaterIntakeTracker({ guest }) {
     const maxGlasses = 8;
