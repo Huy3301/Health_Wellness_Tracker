@@ -152,10 +152,10 @@ export default function FoodTracker({ guest }) {
 
                     {/* Add Food Button */}
                     <div>
-                        <button className="btn btn-outline-success fs-1 px-4" onClick={() => {
-                            fetchMeals();
-                            setShowModal(true);
-                        }}>+</button>
+                        <button
+                            className="btn btn-outline-success fs-4 px-3"
+                            onClick={() => setShowModal(true)}
+                        >+</button>
                     </div>
                 </div>
             </div>
@@ -183,7 +183,7 @@ export default function FoodTracker({ guest }) {
                                 {/* Meal list */}
                                         <div className="list-group mb-3" style={{ maxHeight: '200px', overflowY: 'auto' }}>
                                             {meals
-                                                .filter((meal) => meal.name.toLowerCase().includes(searchTerm.toLowerCase()))
+                                                .filter((meal) => meal.name && meal.name.toLowerCase().includes(searchTerm.toLowerCase()))
                                                 .map((meal) => (
                                                     <button
                                                         key={meal.id}
