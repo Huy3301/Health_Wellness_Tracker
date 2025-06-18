@@ -77,7 +77,16 @@ export default function FoodTracker({ guest }) {
 
                 // Fetch meals (with or without token)
                 const mealsData = await fetchMeals(token);
-                setMeals(mealsData);
+                const normalisedMeals = mealsData.map(meal => ({
+                    id: meal.MealID,
+                    name: meal.Name,
+                    calories: meal.Calories,
+                    protein: meal.Protein,
+                    fat: meal.Fat,
+                    carbs: meal.Carbs,
+                    imageUrl: meal.ImageUrl
+                }));
+                setMeals(normalisedMeals);
             } catch (err) {
                 console.error("Failed to load meals:", err);
             }
