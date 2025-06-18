@@ -1,15 +1,13 @@
-export async function fetchMeals(token = null) {
-    const headers = {};
-
-    // Include token only if it exists (logged-in users)
-    if (token) {
-        headers.Authorization = token;
-    }
-
+export async function fetchMeals(token) {
     try {
         const response = await fetch("https://y98m0iaqea.execute-api.ap-southeast-2.amazonaws.com/meals", {
             method: 'GET',
-            headers,
+            headers: {
+                'Authorization': `Bearer ${token}`,
+                'Content-Type': 'application/json',
+            },
+            mode: 'cors',
+            credentials: 'same-origin'
         });
 
         if (!response.ok) {

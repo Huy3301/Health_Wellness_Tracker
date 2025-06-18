@@ -79,10 +79,12 @@ function App() {
             </nav>
 
             {showLoginPrompt && (
-                <LoginPrompt
-                    onLogin={handleLoginRedirect}
-                    onContinueAsGuest={handleGuestAccess}
-                />
+                <div className="modal-wrapper">
+                    <LoginPrompt
+                        onLogin={handleLoginRedirect}
+                        onContinueAsGuest={handleGuestAccess}
+                    />
+                </div>
             )}
 
             <Routes>

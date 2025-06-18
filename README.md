@@ -52,12 +52,7 @@ The `frontend` folder contains all source code for the React app, including comp
    ```
    The production build will be placed in `frontend/build`.
 
-## Contributing
-
-Contributions are welcome! If you find a bug or have an enhancement request, feel free to open an issue or submit a pull request. Please ensure that any PR passes the existing `npm test` suite before submission.
-
 ## Documentation
 
 Additional information about the architecture and database design can be found in the `docs` folder. This includes a UML diagram of entities (`new.uxf`) and a high level overview of the system (`HighLevelDiagram.drawio.png`).
 
----
