@@ -4,12 +4,19 @@ import BreathingGuide from '../components/BreathingGuide';
 import FoodTracker from '../components/FoodTracker';
 import StepTracker from '../components/StepTracker';
 import AppointmentTracker from '../components/AppointmentTracker';
+import Logo from '../assets/LogoCow.png';
 
 export default function Dashboard({ guest }) {
     return (
         <div className="m-5">
-            <h1 className="text-center m-3">Welcome to Your Health Dashboard</h1>
-            <div className="row m-3 justify-content-center">
+            <div className="row justify-content-center">
+                <img
+                    src={Logo}
+                    alt="Health Wellness Tracker Logo"
+                    className="img-fluid w-50 h-50"
+                />
+            </div>
+            <div className="row m-3">
                 <div className="col-5 mb-4">
                     <MoodTracker guest={guest} />
                 </div>

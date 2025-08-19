@@ -33,11 +33,11 @@ body {
 nav {
     background-color: var(--Primary);
 }
-/*
+
 .navbar-nav.login {
     background-color: var(--Accent);
 }
-*/
+
 .btn {
     background-color: var(--Secondary);
 }

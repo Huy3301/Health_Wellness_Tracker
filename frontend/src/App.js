@@ -55,9 +55,9 @@ function App() {
 
     return (
         <div className="App">
-            <nav className="navbar navbar-expand-sm navbar-toggleable-sm" style={{ minHeight: '18vh' }}>
+            <nav className="navbar navbar-expand-sm navbar-toggleable-sm" style={{ minHeight: '9vh' }}>
                 <div className="container-fluid">
-                    <Link className="navbar-brand text-white mt-1" to="/"><b>Health Wellness Tracker</b></Link>
+                    <Link className="navbar-brand text-white ms-3 mt-1" to="/"><b>Health Wellness Tracker</b></Link>
                     <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                         <span className="navbar-toggler-icon"></span>
@@ -67,11 +67,11 @@ function App() {
                             <Link className="nav-link text-white" to="/home">Home</Link>
                             {user && <Link className="nav-link text-white" to="/dashboard">Dashboard</Link>}
                         </div>
-                        <div className="navbar-nav login px-3 rounded">
+                        <div className="navbar-nav">
                             {user ? (
-                                <button onClick={handleLogout}>Sign out</button>
+                                <button className="p-2 rounded" onClick={handleLogout}>Sign out</button>
                             ) : (
-                                <button onClick={handleLoginRedirect}>Sign in</button>
+                                <button className="p-2 rounded" onClick={handleLoginRedirect}>Sign in</button>
                             )}
                         </div>
                     </div>

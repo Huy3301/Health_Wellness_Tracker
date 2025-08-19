@@ -1,11 +1,16 @@
 ﻿import { useState, useEffect } from 'react';
+import excitedImg from "../assets/ExcitedCow.png";
+import happyImg from "../assets/HappyCow.png";
+import okayImg from "../assets/OkayCow.png";
+import sadImg from "../assets/SadCow.png";
+import stressedImg from "../assets/StressedCow.png";
 
 const moods = [
-    { label: 'Excited', value: 'excited', emoji: '🤩' },
-    { label: 'Happy', value: 'happy', emoji: '😊' },
-    { label: 'Okay', value: 'okay', emoji: '😐' },
-    { label: 'Sad', value: 'sad', emoji: '😢' },
-    { label: 'Stressed', value: 'stressed', emoji: '😣' }
+    { label: 'Excited', value: 'excited', image: excitedImg },
+    { label: 'Happy', value: 'happy', image: happyImg },
+    { label: 'Okay', value: 'okay', image: okayImg },
+    { label: 'Sad', value: 'sad', image: sadImg },
+    { label: 'Stressed', value: 'stressed', image: stressedImg }
 ];
 
 export default function MoodTracker({ guest }) {
@@ -52,7 +57,7 @@ export default function MoodTracker({ guest }) {
             <div className="card p-4 shadow-sm text-center">
                 <h3 className="mb-3">How are you feeling today?</h3>
                 <div className="d-flex justify-content-center flex-wrap gap-3">
-                    {moods.map(({ label, value, emoji }) => (
+                    {moods.map(({ label, value, image }) => (
                         <div>
                             <button
                                 key={value}
@@ -68,7 +73,11 @@ export default function MoodTracker({ guest }) {
                                 }}
                                 aria-label={label}
                             >
-                                {emoji}
+                                <img
+                                    src={image}
+                                    alt={label}
+                                    className="w-8 h-8 img-fluid" 
+                                />
                             </button>
                             <p>{label}</p>
                         </div>
